@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#board {
+    width: 400px;
+    height: 400px;
+    border: 2px solid purple;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#board img {
+    width: 79px;
+    height: 79px;
+    border: 0.5px solid lightblue;
+    outline-offset: -1px; /* Slightly overlap the image */
+}
+
+#pieces {
+    width: 1040px;
+    height: 160px;
+    border: 2px solid purple;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#pieces img {
+    width: 79px;
+    height: 79px;
+    border: 0.5px solid lightblue;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+#overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s;
+}
+
+#congratsMessage {
+    animation: scaleUp 0.5s ease-out;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Add confetti animation */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    z-index: 1100;
+    animation: fall 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Hint Highlighting */
+#board img.outline-green {
+    outline: 4px solid #00FF00; /* Neon green */
+    box-shadow: 0 0 10px #00FF00; /* Glowing effect */
+}
+
+#pieces img.outline-green {
+    outline: 4px solid #00FF00; /* Neon green */
+    box-shadow: 0 0 10px #00FF00; /* Glowing effect */
+}
+
+function dragStart() {
+    currTile = this; // This is the piece (or tile) being dragged
+    currTile.style.opacity = "0.5"; // Visual indication
+}
+
+function dragEnd() {
+    currTile.style.opacity = "1"; // Reset the visual effect
+    currTile = null;
+    otherTile = null;
+}
+
